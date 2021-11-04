@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header text-center">
+      <span>Listadod de cuentas</span>
+    </div>
+    <h5 style="margin-top: 30px" *ngIf="accountsdata.length == 0">No hay para mostrar en el sistema</h5>
+    <div class="card-body ">
+      <div class="accordion" id="accordionExample" *ngFor="let account of accountsdata; let i = index;">
+        <div class="card text-white bg-danger mb-3" >
+          <div class="card-header" [attr.id]="'accordion_' + i">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-left collapsed text-white"
+                type="button"
+                data-toggle="collapse"
+                [attr.data-target]="'#accordion_-' + i"
+                [attr.aria-expanded]="false"
+                [attr.aria-controls] = "'accordion_-' + i"
+              >
+                {{account.name}}
+              </button>
+            </h2>
+          </div>
+
+          <div
+            [attr.id]="'accordion_-' + i"
+            class="collapse"
+            [attr.aria-labelledby]="'accordion_' + i"
+            [attr.data-parent]="'#accordion_-' + i"
+          >
+            <div class="card-body">
+                  <div class="col">Numero de la Cuenta: &nbsp;&nbsp;&nbsp;{{account.number}}</div>
+                  <div class="col">Tipo de Cuenta:&nbsp;&nbsp;&nbsp;{{account.type}}</div>
+                  <div class="col">
+                    estado de la cuenta:&nbsp;&nbsp;&nbsp;
+                    <i class="fas fa-check-circle" *ngIf="account.status == 'activa' "></i>
+                    <i class="fas fa-times" *ngIf="account.status == 'inactiva'"></i>
+                  </div>
+                  <div class="col">Saldo de la cuenta:&nbsp;&nbsp;&nbsp;  {{account.balance | currency:"COP":"symbol" }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
